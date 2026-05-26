@@ -1,0 +1,186 @@
+<div class="sidebar glass">
+  <div class="logo">
+      <img src="/img/logo.png" alt="Nexus POS" style="width: 180px; display: block; margin: 0 auto; border-radius: 12px;">
+  </div>
+  <ul class="nav-links">
+      <li><a href="#" data-target="dashboard-section" class="nav-btn active"><i class="fa-solid fa-chart-pie"></i> Dashboard</a></li>
+      <li><a href="#" data-target="products-section" class="nav-btn"><i class="fa-solid fa-box-open"></i> Products</a></li>
+      <li><a href="#" data-target="orders-section" class="nav-btn"><i class="fa-solid fa-receipt"></i> Orders</a></li>
+      <li><a href="#" data-target="users-section" class="nav-btn"><i class="fa-solid fa-users"></i> Users</a></li>
+      <li><a href="#" data-target="settings-section" class="nav-btn"><i class="fa-solid fa-gear"></i> Settings</a></li>
+  </ul>
+</div>
+
+<div class="main-content">
+  <div class="header">
+      <h1 id="page-title">Overview</h1>
+      <div class="user-profile">
+          <div class="avatar">A</div>
+          <span>Admin</span>
+          <button id="logout-btn" class="btn btn-sm" style="margin-left: 10px; width: auto; padding: 5px 10px; font-size: 12px; background: transparent; border: 1px solid var(--danger); color: var(--danger);">Logout</button>
+      </div>
+  </div>
+
+  <!-- DASHBOARD SECTION -->
+  <div id="dashboard-section" class="page-section">
+      <div class="dashboard-grid">
+          <div class="stat-card glass">
+              <div class="stat-header"><span>Total Revenue</span><i class="fa-solid fa-wallet"></i></div>
+              <div class="stat-value" id="stat-revenue">$0.00</div>
+          </div>
+          <div class="stat-card glass">
+              <div class="stat-header"><span>Total Orders</span><i class="fa-solid fa-cart-shopping"></i></div>
+              <div class="stat-value" id="stat-orders">0</div>
+          </div>
+          <div class="stat-card glass">
+              <div class="stat-header"><span>Products in Stock</span><i class="fa-solid fa-box"></i></div>
+              <div class="stat-value" id="stat-products">0</div>
+          </div>
+          <div class="stat-card glass">
+              <div class="stat-header"><span>Users</span><i class="fa-solid fa-user-group"></i></div>
+              <div class="stat-value" id="stat-users">0</div>
+          </div>
+      </div>
+  </div>
+
+  <!-- PRODUCTS SECTION -->
+  <div id="products-section" class="page-section hidden">
+      <div class="card glass mb-4">
+          <h3>Add Product</h3>
+          <form id="add-product-form" class="form-grid">
+              <div class="input-group"><label>Name</label><input type="text" id="prod-name" required></div>
+              <div class="input-group"><label>Barcode</label><input type="text" id="prod-barcode" required></div>
+              <div class="input-group"><label>Price</label><input type="number" id="prod-price" min="0" step="0.01" required></div>
+              <div class="input-group"><label>Stock</label><input type="number" id="prod-stock" min="0" required></div>
+              <div class="input-group"><label>Category</label><input type="text" id="prod-category" required></div>
+              <div class="input-group" style="display: flex; align-items: flex-end;"><button type="submit" class="btn">Add Product</button></div>
+          </form>
+      </div>
+      <div class="card glass">
+          <h3>Product List</h3>
+          <table class="data-table">
+              <thead><tr><th>Barcode</th><th>Name</th><th>Category</th><th>Price</th><th>Stock</th></tr></thead>
+              <tbody id="products-tbody"></tbody>
+          </table>
+      </div>
+  </div>
+
+  <!-- ORDERS SECTION -->
+  <div id="orders-section" class="page-section hidden">
+      <div class="card glass">
+          <h3>Order History</h3>
+          <table class="data-table">
+              <thead><tr><th>Order ID</th><th>Date</th><th>Items</th><th>Total</th><th>Payment</th></tr></thead>
+              <tbody id="orders-tbody"></tbody>
+          </table>
+      </div>
+  </div>
+
+  <!-- USERS SECTION -->
+  <div id="users-section" class="page-section hidden">
+      <div class="card glass mb-4">
+          <h3>Add User</h3>
+          <form id="add-user-form" class="form-grid">
+              <div class="input-group">
+                <label>Role</label>
+                <select id="user-role" style="width: 100%; padding: 12px; background: rgba(0,0,0,0.2); border: 1px solid var(--glass-border); border-radius: 8px; color: white;">
+                    <option value="customer">Customer</option>
+                    <option value="staff">Staff</option>
+                    <option value="admin">Admin</option>
+                </select>
+              </div>
+              <div class="input-group" id="group-name"><label>Name</label><input type="text" id="user-name"></div>
+              <div class="input-group" id="group-phone"><label>Phone</label><input type="text" id="user-phone" required></div>
+              <div class="input-group" id="group-email"><label>Email</label><input type="email" id="user-email"></div>
+              <div class="input-group" id="group-password" style="display:none;"><label>Password</label><input type="password" id="user-password"></div>
+              <div class="input-group" id="group-address"><label>Address</label><input type="text" id="user-address"></div>
+              <div class="input-group" style="display: flex; align-items: flex-end;"><button type="submit" class="btn">Add User</button></div>
+          </form>
+      </div>
+      <div class="card glass">
+          <h3>User List</h3>
+          <table class="data-table">
+              <thead><tr><th>Role</th><th>Name</th><th>Phone</th><th>Email</th><th>Staff ID / Address</th></tr></thead>
+              <tbody id="users-tbody"></tbody>
+          </table>
+      </div>
+  </div>
+
+  <!-- SETTINGS SECTION -->
+  <div id="settings-section" class="page-section hidden">
+      <div class="card glass">
+          <h3>Store Settings</h3>
+          <form id="settings-form" class="form-grid">
+              <div class="input-group"><label>Store Name</label><input type="text" id="set-name" required></div>
+              <div class="input-group"><label>GST %</label><input type="number" id="set-gst" min="0" max="100" required></div>
+              <div class="input-group"><label>Store Phone</label><input type="text" id="set-phone"></div>
+              <div class="input-group"><label>Store Address</label><input type="text" id="set-address"></div>
+              <div class="input-group"><label>Printer Paper Size</label>
+                  <select id="set-paper" style="width: 100%; padding: 12px; background: rgba(0,0,0,0.2); border: 1px solid var(--glass-border); border-radius: 8px; color: white; margin-top:8px;">
+                      <option value="80mm">80mm</option>
+                      <option value="58mm">58mm</option>
+                  </select>
+              </div>
+              <div class="input-group" style="display: flex; align-items: flex-end;"><button type="submit" class="btn">Update Settings</button></div>
+          </form>
+      </div>
+  </div>
+</div>
+
+<!-- Login Modal -->
+<div id="login-modal" class="hidden">
+  <div class="login-box glass">
+      <img src="/img/logo.png" alt="Nexus POS Logo" style="width: 120px; margin-bottom: 20px; border-radius: 8px;">
+      <h2>Welcome Back</h2>
+      <form id="login-form">
+          <div class="input-group">
+              <label>Email</label>
+              <input type="email" id="email" value="admin@test.com" required>
+          </div>
+          <div class="input-group">
+              <label>Password</label>
+              <input type="password" id="password" value="123456" required>
+          </div>
+          <button type="submit" class="btn">Login to POS</button>
+      </form>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const roleSelect = document.getElementById('user-role');
+    const groupName = document.getElementById('group-name');
+    const groupPhone = document.getElementById('group-phone');
+    const groupEmail = document.getElementById('group-email');
+    const groupPassword = document.getElementById('group-password');
+    const groupAddress = document.getElementById('group-address');
+
+    if (roleSelect) {
+      roleSelect.addEventListener('change', (e) => {
+        const role = e.target.value;
+        if (role === 'admin') {
+          groupName.style.display = 'none';
+          groupPhone.style.display = 'block';
+          groupEmail.style.display = 'block';
+          groupPassword.style.display = 'block';
+          groupAddress.style.display = 'none';
+        } else if (role === 'staff') {
+          groupName.style.display = 'none';
+          groupPhone.style.display = 'block';
+          groupEmail.style.display = 'none';
+          groupPassword.style.display = 'none';
+          groupAddress.style.display = 'none';
+        } else {
+          // customer
+          groupName.style.display = 'block';
+          groupPhone.style.display = 'block';
+          groupEmail.style.display = 'block';
+          groupPassword.style.display = 'none';
+          groupAddress.style.display = 'block';
+        }
+      });
+      // trigger change on load
+      roleSelect.dispatchEvent(new Event('change'));
+    }
+  });
+</script>
