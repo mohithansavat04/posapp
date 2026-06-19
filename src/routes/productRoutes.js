@@ -5,12 +5,14 @@ const {
   searchProduct,
   addProduct,
   updateProduct,
-  deleteProduct
+  deleteProduct,
+  syncDummyProducts
 } = require('../controllers/productController');
 const { protect } = require('../middleware/auth');
 
 // Note: Ensure /search is placed before /:id so it doesn't get treated as an ID
 router.get('/search', protect, searchProduct);
+router.post('/sync', protect, syncDummyProducts);
 
 router.route('/')
   .get(protect, getProducts)

@@ -101,7 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
           if (statUsers) statUsers.innerText = users.length || 0;
           
           const revenue = orders.reduce((sum, o) => sum + (o.total || 0), 0);
-          document.getElementById('stat-revenue').innerText = '$' + revenue.toFixed(2);
+          document.getElementById('stat-revenue').innerText = '₹' + revenue.toFixed(2);
       } catch (e) { console.error('Stat fetch failed', e); }
   }
 
@@ -118,7 +118,7 @@ document.addEventListener('DOMContentLoaded', () => {
               <td>${p.barcode}</td>
               <td>${p.name}</td>
               <td>${p.category}</td>
-              <td>$${p.price.toFixed(2)}</td>
+              <td>₹${p.price.toFixed(2)}</td>
               <td>${p.stock}</td>
           </tr>
       `).join('');
@@ -211,7 +211,7 @@ document.addEventListener('DOMContentLoaded', () => {
               <td>${o._id.substring(0,8)}...</td>
               <td>${new Date(o.createdAt).toLocaleDateString()}</td>
               <td>${o.items.length} items</td>
-              <td>$${o.total.toFixed(2)}</td>
+              <td>₹${o.total.toFixed(2)}</td>
               <td><span style="text-transform: capitalize;">${o.paymentMethod}</span></td>
           </tr>
       `).join('');

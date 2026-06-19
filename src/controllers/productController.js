@@ -100,4 +100,36 @@ const deleteProduct = async (req, res, next) => {
   }
 };
 
-module.exports = { getProducts, searchProduct, addProduct, updateProduct, deleteProduct };
+// @desc    Sync dummy products
+// @route   POST /api/products/sync
+// @access  Private
+const syncDummyProducts = async (req, res, next) => {
+  try {
+    // Clear existing products
+    await Product.deleteMany({});
+
+    const categories = ['Beverages', 'Snacks', 'Main Course', 'Desserts', 'Breads'];
+    const dummyProducts = [];
+
+    for (let i = 1; i <= 100; i++) {
+      const category = categories[i % categories.length];
+      const price = Math.floor(Math.random() * 500) + 50; // Random price between 50 and 550
+      const stock = Math.floor(Math.random() * 100) + 10;
+      
+      dummyProducts.push({
+        name: `Dummy ${category} Item ${i}`,
+        barcode: `1000${i.toString().padStart(3, '0')}`,
+        price: price,
+        stock: stock,
+        category: category
+      });
+    }
+
+    await Product.insertMany(dummyProducts);
+    res.status(201).json({ message: '100 dummy products synced successfully' });
+  } catch (error) {
+    next(error);
+  }
+};
+
+module.exports = { getProducts, searchProduct, addProduct, updateProduct, deleteProduct, syncDummyProducts };
